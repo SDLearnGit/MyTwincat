@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="MAIN" Id="{daaf4cc8-0a1b-4c17-a493-f88edd34ad13}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	TestStruct : MyStruct;
+	MyRef : REFERENCE TO MyStruct;
+	Test1 : INT;
+	Test2 : INT;
+	Test3 : INT;
+	Test4 : INT;
+	Run : INT;
+	i : UINT;
+	sIP        : STRING(255) := 'abc';
+	sIP2        : STRING := 'abc';
+test : UINT;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Run = 0 THEN
+	MyRef REF= TestStruct;
+	TestStruct.Par1 := 1;
+	TestStruct.Par2 := 2;
+	Test1 := MyRef.Par1;
+	MyRef.Par2 := 3;
+	Test2 := MyRef.Par2;
+	MyRef.Par1 := MyRef.Par2 + 1;
+	Test3 := MyRef.Par1;
+	Run := 1;
+END_IF
+
+IF sIP = sIP2 THEN
+	i := 2;
+END_IF
+
+test := REAL_TO_UINT(67533.53);]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="18" Count="3" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="38" Count="2" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
